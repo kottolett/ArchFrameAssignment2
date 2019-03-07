@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="header :: header"></head>
+<body>
+<div th:replace="header :: navbar"></div>
+
+<div class="container">
+    <div class="row my-5">
+        <div class="col-sm-6 mx-auto">
+            <h2 class="text-info text-center font-weight-bold">Add Order</h2>
+            <form th:action="@{/saveOrder}" method="post" th:object="${order}">
+                <div class="form-group">
+                    <input type="hidden" class="form-control" th:value="${order.id}" name="id">
+                </div>
+                <div class="form-group">
+                    <input type="hidden" class="form-control" th:value="${#temporals.format(localDate, 'dd-MM-yyyy')}" name="date">
+                </div>
+                <div>
+                    <label for="cust">Select customer:</label>
+                    <select id="cust" class="form-control" th:field="*{shipping}" required>
+                        <option th:each="shipping : ${shippings}" th:value="${shipping.id}" th:text="${shipping}">
+                    </select>
+                    <a class="btn btn-link my-2" th:href="@{/createCustomer}">Create customer</a>
+                </div>
+                <div class="form-group">
+                    <label for="book">Select books(s):</label>
+                    <select multiple id="book" class="form-control" th:field="*{books}" required>
+                        <option th:each="book : ${books}" th:if="${book.quantity} > 0" th:value="${{book.isbn}}" th:text="${book.title}">
+                    </select>
+                </div>
+                <button class="btn btn-outline-info">Save</button>
+                <a href="/seeOrders" type="button" class="btn btn-outline-danger float-right">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

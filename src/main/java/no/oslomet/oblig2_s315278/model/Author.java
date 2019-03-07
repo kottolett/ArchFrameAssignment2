@@ -1,0 +1,33 @@
+package no.oslomet.oblig2_s315278.model;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
+@Data
+@NoArgsConstructor
+public class Author {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String firstName;
+    private String lastName;
+    private String rating;
+
+    @ManyToMany(mappedBy = "authors")
+    private List<Book> books;
+
+    public Author(String firstName, String lastName, String rating) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.rating = rating;
+    }
+
+    @Override
+    public String toString() {
+        return this.firstName + " " + this.lastName;
+    }
+}

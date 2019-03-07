@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="header :: header"></head>
+<body>
+<div th:replace="header :: navbar"></div>
+
+<!--List books-->
+<div class="container">
+    <div class="row my-5">
+        <div class="col-sm-10 mx-auto">
+            <h2 class="text-info text-center font-weight-bold">Books</h2>
+            <table class="table">
+                <tr>
+                    <th scope="col">ISBN</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Release Year</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Authors</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                </tr>
+                <tbody>
+                <tr th:each="book : ${books}">
+                    <td th:text="${book.isbn}"></td>
+                    <td th:text="${book.title}"></td>
+                    <td th:text="${book.releaseYear}"></td>
+                    <td th:text="${book.quantity}"></td>
+                    <td th:text="${book.category.name}"></td>
+                    <td th:text="${#strings.arrayJoin(book.authors, ', ')}"></td>
+                    <td>
+                        <a class="btn btn-warning" th:href="@{/editBook/}+${book.isbn}">Edit</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-danger" th:href="@{/deleteBook/}+${book.isbn}">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div>
+                <a th:href="@{/addBook}" class="btn btn-outline-info" role="button">Add book</a>
+                <a th:href="@{/addAuthor}" class="btn btn-outline-info" role="button">Add author</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

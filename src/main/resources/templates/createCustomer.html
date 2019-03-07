@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="header :: header"></head>
+<body>
+<div th:replace="header :: navbar"></div>
+
+<div class="container">
+    <div class="row my-5">
+        <div class="col-sm-6 mx-auto">
+            <h2 class="text-info text-center font-weight-bold">Register</h2>
+            <form th:action="@{/saveCustomer}" method="post" th:object="${shipping}">
+                <div class="form-group">
+                    <input type="hidden" class="form-control" th:value="${shipping.id}" name="id">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" th:value="${shipping.firstName}" placeholder="First Name" name="firstName" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" th:value="${shipping.lastName}" placeholder="Last Name" name="lastName" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" th:value="${shipping.address}" placeholder="Address" name="address" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" th:value="${shipping.postalCode}" placeholder="Postal Code" name="postalCode" required>
+                </div>
+                <button class="btn btn-outline-info">Save</button>
+                <a href="/seeOrders" type="button" class="btn btn-outline-danger float-right">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
